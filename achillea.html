@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achillea tenorei Grande - Flora Digitalis</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f5; padding-bottom: 60px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        header { background-color: #2c5e3b; color: white; padding: 30px 20px; text-align: center; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        header h1 { font-style: italic; font-size: 2.2rem; margin-bottom: 5px; }
+        header .sub-title { font-size: 1.1rem; opacity: 0.9; font-weight: bold; }
+        header .family { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; opacity: 0.8; }
+        .main-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        @media (min-width: 850px) { .main-grid { grid-template-columns: 450px 1fr; } }
+        .botanical-gallery { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e6e2; box-shadow: 0 2px 4px rgba(0,0,0,0.05); height: fit-content; }
+        .gallery-title { font-size: 1.1rem; color: #2c5e3b; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #2c5e3b; padding-bottom: 5px; }
+        .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .photo-card { background: #f9fbf9; border: 1px solid #d0dad2; border-radius: 6px; overflow: hidden; text-align: center; font-size: 0.85rem; font-weight: bold; color: #555; }
+        .photo-box { height: 140px; background-color: #e2ebe4; display: flex; align-items: center; justify-content: center; color: #8fa393; font-style: italic; font-weight: normal; border-bottom: 1px solid #d0dad2; }
+        .photo-card span { display: block; padding: 6px 4px; background: white; }
+        .photo-card.full-plant { grid-column: span 2; }
+        .photo-card.full-plant .photo-box { height: 220px; }
+        .botanical-info { background: white; padding: 25px; border-radius: 8px; border: 1px solid #e0e6e2; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .section-block { margin-bottom: 25px; }
+        .section-block:last-child { margin-bottom: 0; }
+        .section-block h2 { color: #2c5e3b; font-size: 1.3rem; margin-bottom: 10px; border-bottom: 1px solid #d0dad2; padding-bottom: 4px; display: flex; align-items: center; }
+        .section-block h2::before { content: "🌿"; margin-right: 8px; font-size: 1.1rem; }
+        ul { list-style-type: none; }
+        li { margin-bottom: 8px; padding-left: 15px; position: relative; }
+        li::before { content: "•"; color: #2c5e3b; font-weight: bold; font-size: 1.2rem; position: absolute; left: 0; top: -2px; }
+        strong { color: #111; }
+        p { margin-bottom: 12px; text-align: justify; }
+        .badge-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .badge { background: #e2ebe4; color: #2c5e3b; padding: 4px 10px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; border: 1px solid #cbdcd0; }
+    </style>
+</head>
+<body>
+
+    <!-- NUOVO MENU DI NAVIGAZIONE DI RITORNO -->
+    <div style="background: #ffffff; padding: 12px; text-align: left; border-bottom: 3px solid #2c5e3b; margin-bottom: 15px;">
+        <a href="index.html" style="text-decoration: none; font-weight: bold; color: #2c5e3b; padding: 6px 12px; background: #e2ebe4; border-radius: 4px; font-size: 0.95rem;">⬅️ Torna all'Indice delle Forme Biologiche (Raunkiær)</a>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Achillea tenorei Grande</h1>
+            <div class="sub-title">Nome comune: Millefoglio di Tenore</div>
+            <div class="family">Famiglia: Asteraceae (Compositae)</div>
+            <div style="margin-top: 8px; font-weight: bold; background: rgba(255,255,255,0.2); display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.85rem;">Forma Biologica: H scap (Emicrittofita scaposa)</div>
+        </header>
+
+        <div class="main-grid">
+            <aside class="botanical-gallery">
+                <div class="gallery-title">Galleria Fotografica Organizzata</div>
+                <div class="photo-grid">
+                    <div class="photo-card full-plant">
+                        <div class="photo-box">[ Inserisci Foto: Portamento ]</div>
+                        <span>Pianta Intera / Portamento</span>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-box">[ Foto: Fusto ]</div>
+                        <span>Fusto e Rami</span>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-box">[ Foto: Foglia ]</div>
+                        <span>Fogliame</span>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-box">[ Foto: Infiorescenza ]</div>
+                        <span>Fiori & Infiorescenza</span>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-box">[ Foto: Frutto ]</div>
+                        <span>Frutti & Semi</span>
+                    </div>
+                    <div class="photo-card full-plant">
+                        <div class="photo-box">[ Foto: Radice ]</div>
+                        <span>Apparato Radicale</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="botanical-info">
+                <div class="section-block">
+                    <h2>Inquadramento Tassonomico</h2>
+                    <p>La <strong>Achillea tenorei Grande</strong> (nota anche come <em>Achillea mucronulata</em> Bertol.) è una specie perenne appartenente alla famiglia delle Asteraceae. Rappresenta un elemento di notevole interesse botanico, endemico dell'Appennino centrale e meridionale.</p>
+                    <div class="badge-list">
+                        <div class="badge">Ciclo: Perenne</div>
+                        <div class="badge">Genere: Achillea</div>
+                        <div class="badge">Specie: A. tenorei</div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h2>Caratteristiche Generali e Distintive</h2>
+                    <ul>
+                        <li><strong>Tipo di pianta:</strong> Erbacea perenne, emicrittofita scaposa.</li>
+                        <li><strong>Pianta e Portamento:</strong> Fusti eretti o ascendenti, semplici o debolmente ramificati in alto, alti solitamente tra <strong>15 e 40 cm</strong>, provvisti di una fitta pelosità cenerina.</li>
+                        <li><strong>Foglie:</strong> Le foglie sono alterne, laciniate, divise in lacinie lineari-lanceolate e strette, progressivamente ridotte lungo il fusto.</li>
+                        <li><strong>Fiori:</strong> Riuniti in piccoli capolini che formano un corimbo denso all'apice del fusto. I fiori periferici sono ligulati, di colore <strong>bianco o leggermente roseo</strong>, mentre quelli centrali sono tubulosi e giallognoli.</li>
+                        <li><strong>Periodo di fioritura:</strong> Estiva, indicativamente da <strong>giugno ad agosto</strong>.</li>
+                        <li><strong>Frutto:</strong> Achenio oblungo, compresso, privo di pappo.</li>
+                    </ul>
+                </div>
+
+                <div class="section-block">
+                    <h2>Origine, Corologia e Habitat</h2>
+                    <ul>
+                        <li><strong>Origine:</strong> Specie nativa ed <strong>endemica dell'Italia meridionale</strong>.</li>
+                        <li><strong>Corologia:</strong> Endemica Appenninica.</li>
+                        <li><strong>Habitat d'elezione:</strong> Vegeta preferibilmente in praterie montane e subalpine, pascoli aridi, ghiaioni e rupi calcaree esposte, a quote comprese tra <strong>1000 e 2200 m s.l.m.</strong>, prediligendo suoli calcarei ben drenati.</li>
+                    </ul>
+                </div>
+
+                <div class="section-block">
+                    <h2>Proprietà ed Utilizzi</h2>
+                    <ul>
+                        <li><strong>Officinali:</strong> Come molte specie del genere Achillea, possiede proprietà potenzialmente <strong>antinfiammatorie, cicatrizzanti e digestive</strong>, grazie alla presenza di oli essenziali e principi amari, sebbene l'uso sia limitato alla tradizione locale per via della sua rarità.</li>
+                        <li><strong>Alimentari:</strong> Non si segnalano utilizzi alimentari significativi.</li>
+                        <li><strong>Ornamentali:</strong> Adatta a giardini rocciosi montani e a bassa manutenzione idrica.</li>
+                        <li><strong>Tossicità:</strong> Non considerata tossica, ma se ne sconsiglia la raccolta incontrollata per proteggere le popolazioni naturali.</li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camefite Pulvinate - Flora della Campania</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f2f6f3; color: #2b3a2f; padding: 30px 15px; }
+        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .back-btn { display: inline-block; text-decoration: none; color: #2e6f40; font-weight: bold; margin-bottom: 20px; }
+        h1 { color: #1e4b2b; margin-bottom: 5px; }
+        .sub-title { color: #687e6e; font-style: italic; margin-bottom: 35px; }
+        .taxonomy-block { background: #fafdfb; border: 1px solid #cfe2d4; border-left: 5px solid #2e6f40; border-radius: 6px; padding: 15px 20px; margin-top: 25px; margin-bottom: 10px; }
+        .taxonomy-info { font-size: 1rem; color: #4e5e52; }
+        .taxonomy-info strong { color: #1e4b2b; text-transform: uppercase; }
+        .flora-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .flora-table th { background: #edf4ef; text-align: left; padding: 12px; font-size: 0.9rem; color: #415647; border-bottom: 2px solid #cfe2d4; text-transform: uppercase; }
+        .flora-table td { padding: 16px 12px; border-bottom: 1px solid #edf4ef; font-size: 1.05rem; vertical-align: top; }
+        .current-species { font-family: 'Segoe UI', sans-serif; font-weight: bold; color: #1a365d; font-size: 1.2rem; display: block; scroll-margin-top: 20px; }
+        .synonym-species { font-style: italic; font-weight: normal; color: #c53030; font-size: 1.15rem; display: block; }
+        .tax-link { display: inline-block; font-size: 0.85rem; background: #fff5f5; border: 1px solid #feb2b2; color: #c53030; padding: 3px 8px; border-radius: 4px; margin-top: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s; }
+        .tax-link:hover { background: #fed7d7; text-decoration: underline; }
+        .italian-names { color: #2c3e50; line-height: 1.5; font-weight: 500; }
+        .loading { font-size: 1.2rem; color: #687e6e; font-style: italic; }
+        @keyframes highlight { 0% { background-color: #fff9db; } 100% { background-color: transparent; } }
+        .target-highlight { animation: highlight 2s ease-out; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-btn">⬅ Torna alla Home</a>
+    
+    <h1>Camefite pulvinate (Ch pulv)</h1>
+    <p class="sub-title">Piante con accrescimento compatto, a forma di cuscinetto emisferico</p>
+
+    <div id="loading-status" class="loading">Caricamento delle piante in corso...</div>
+    <div id="database-content"></div>
+</div>
+
+<script>
+    const targetSigla = "Ch pulv";
+
+    Papa.parse("Piante.csv", {
+        download: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+            document.getElementById('loading-status').style.display = 'none';
+            if (results && results.data) { renderTable(results.data); }
+        }
+    });
+
+    function createId(name) {
+        if (!name) return "";
+        return name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').trim();
+    }
+
+    function renderTable(data) {
+        const container = document.getElementById('database-content');
+        let htmlOutput = "";
+        let groups = {};
+
+        data.forEach(row => {
+            if(!row || row.length < 6) return;
+
+            let formaBioSigla  = row[0] ? row[0].trim() : "";
+            let ordine         = row[3] ? row[3].trim() : "";
+            let famiglia       = row[4] ? row[4].trim() : "";
+            let specieValida   = row[5] ? row[5].trim() : "";
+            let specieSinonimo = row[6] ? row[6].trim() : "";
+            let notaVedi       = row[7] ? row[7].trim() : "";
+            let nomeAttuale    = row[8] ? row[8].trim() : "";
+            let nomiItaliani   = row[9] ? row[9].trim() : "";
+
+            if (formaBioSigla.includes(targetSigla)) {
+                if(!ordine) ordine = "ORDINE NON SPECIFICATO";
+                if(!famiglia) famiglia = "FAMIGLIA NON SPECIFICATA";
+
+                if (!groups[ordine]) groups[ordine] = {};
+                if (!groups[ordine][famiglia]) groups[ordine][famiglia] = [];
+
+                let esSinonimo = notaVedi.toLowerCase().includes('vedi');
+
+                groups[ordine][famiglia].push({
+                    speciePrincipale: specieValida,
+                    sottospecie: specieSinonimo,
+                    isSinonimo: esSinonimo,
+                    testoVedi: notaVedi,
+                    destinazioneLink: nomeAttuale,
+                    nomiComuni: nomiItaliani
+                });
+            }
+        });
+
+        if (Object.keys(groups).length === 0) {
+            container.innerHTML = "<p class='loading'>Nessuna pianta trovata con la sigla '" + targetSigla + "'.</p>";
+            return;
+        }
+
+        for (let ordine in groups) {
+            for (let famiglia in groups[ordine]) {
+                htmlOutput += `
+                    <div class="taxonomy-block">
+                        <div class="taxonomy-info">Ordine: <strong>${ordine}</strong> &nbsp;|&nbsp; Famiglia: <strong>${famiglia}</strong></div>
+                    </div>
+                    <table class="flora-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 55%;">Specie / Sottospecie / Sinonimi</th>
+                                <th style="width: 45%;">Nomi Italiani e Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                groups[ordine][famiglia].forEach(pianta => {
+                    let rigaHtml = "";
+                    let notaHtml = "";
+
+                    if (pianta.isSinonimo) {
+                        let nomeSinonimo = pianta.sottospecie ? pianta.sottospecie : pianta.speciePrincipale;
+                        rigaHtml = `<span class="synonym-species">${nomeSinonimo}</span>`;
+                        if (pianta.destinazioneLink) {
+                            let ancoraTarget = createId(pianta.destinazioneLink);
+                            let testoLink = `${pianta.testoVedi} ${pianta.destinazioneLink}`;
+                            notaHtml = `<a href="#${ancoraTarget}" class="tax-link" onclick="highlightTarget('${ancoraTarget}')">🔗 ${testoLink}</a>`;
+                        } else {
+                            notaHtml = `<span class="tax-link" style="background:#f5f5f5; border-color:#ccc; color:#666;">${pianta.testoVedi}</span>`;
+                        }
+                    } else {
+                        let nomeCompletoAttuale = pianta.sottospecie ? `${pianta.speciePrincipale} ${pianta.sottospecie}` : pianta.speciePrincipale;
+                        let idAncora = createId(pianta.speciePrincipale);
+                        rigaHtml = `<span class="current-species" id="${idAncora}">${nomeCompletoAttuale}</span>`;
+                    }
+
+                    htmlOutput += `
+                        <tr>
+                            <td>${rigaHtml}${notaHtml}</td>
+                            <td class="italian-names">${pianta.nomiComuni ? pianta.nomiComuni : "-"}</td>
+                        </tr>
+                    `;
+                });
+
+                htmlOutput += `</tbody></table>`;
+            }
+        }
+        container.innerHTML = htmlOutput;
+    }
+
+    function highlightTarget(id) {
+        setTimeout(() => {
+            let el = document.getElementById(id);
+            if(el) {
+                let riga = el.closest('tr');
+                if(riga) {
+                    riga.classList.remove('target-highlight');
+                    void riga.offsetWidth;
+                    riga.classList.add('target-highlight');
+                }
+            }
+        }, 50);
+    }
+</script>
+
+</body>
+</html>
