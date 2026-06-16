@@ -41,23 +41,24 @@
 </div>
 
 <script>
-    console.log("Lo script è partito!");
-    const targetSigla = "Ch pulv"; // Verifica che sia ESATTAMENTE così nel CSV
+    const targetSigla = "Ch pulv"; // Assicurati che nel CSV sia scritto ESATTAMENTE così
 
-    Papa.parse("Piante.csv", {
+    // Carichiamo il file dalla radice principale usando il percorso relativo corretto
+    Papa.parse("../Piante.csv", {
         download: true,
-        header: false,
+        skipEmptyLines: true,
         complete: function(results) {
-            console.log("File caricato! Numero righe:", results.data.length);
             document.getElementById('loading-status').style.display = 'none';
-            if (results && results.data) { renderTable(results.data); }
+            if (results && results.data) {
+                renderTable(results.data);
+            }
         },
         error: function(err) {
-            console.error("Errore nel caricamento:", err);
+            console.error("Errore critico di caricamento:", err);
+            document.getElementById('loading-status').innerHTML = "Errore: file CSV non trovato. Controlla il percorso.";
         }
     });
 
-    // ... (tutto il resto delle tue funzioni createId, renderTable, ecc. restano qui sotto)
-</script>
-</body>
+    // ... (lascia qui sotto il resto delle tue funzioni: createId, renderTable, highlightTarget)
+</script></body>
 </html>
