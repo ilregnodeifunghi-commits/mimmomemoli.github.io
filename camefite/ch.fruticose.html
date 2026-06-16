@@ -44,8 +44,8 @@
 <script>
     const targetSigla = "Ch frut";
 
-    Papa.parse("../Piante.csv", {
-        download: true,
+    Papa.parse("https://ilregnodeifunghi-commits.github.io/Piante.csv", {
+    download: true,
         skipEmptyLines: true,
         complete: function(results) {
             document.getElementById('loading-status').style.display = 'none';
