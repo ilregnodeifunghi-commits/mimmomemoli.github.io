@@ -2,16 +2,51 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camefite Fruticose - Flora della Campania</title>
     <style>
-        body { font-family: sans-serif; padding: 40px; line-height: 1.6; background: #fdfdfd; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #7c2d12; text-decoration: none; font-weight: bold; }
-        h1 { color: #7c2d12; border-bottom: 2px solid #7c2d12; padding-bottom: 10px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f1f5f9; color: #1e293b; padding: 40px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        
+        .nav-back { display: inline-block; margin-bottom: 20px; color: #1e293b; text-decoration: none; font-weight: 600; padding: 8px 16px; background: #e2e8f0; border-radius: 8px; }
+        .nav-back:hover { background: #cbd5e1; }
+
+        h1 { font-size: 2.5rem; color: #7c2d12; margin-bottom: 10px; }
+        p { font-size: 1.1rem; color: #64748b; margin-bottom: 30px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #f8fafc; text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
+        .btn-view { background: #7c2d12; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; }
+        .btn-view:hover { background: #9a3412; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-link">← Torna alla Home</a>
-    <h1>Camefite Fruticose</h1>
-    <p>Questa è la pagina dedicata alle Camefite Fruticose.</p>
+
+<div class="container">
+    <a href="index.html" class="nav-back">🏠 HOME</a>
+    
+    <h1>Camefite Fruticose (Ch frut)</h1>
+    <p>Piante legnose perenni con gemme poste tra i 5 e i 30 cm dal suolo.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>NOME SCIENTIFICO</th>
+                <th>NOME ITALIANO</th>
+                <th>SCHEDA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><em>Nome Scientifico Esempio</em></td>
+                <td>Nome Comune</td>
+                <td><a href="#" class="btn-view">Visualizza Scheda ➔</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>
