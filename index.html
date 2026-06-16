@@ -196,8 +196,21 @@
 
 <script>
     function toggleSection(bannerElement) {
-        const areaBlock = bannerElement.parentElement;
-        areaBlock.classList.toggle('active');
+        // 1. Prendi il blocco corrente che è stato cliccato
+        const currentArea = bannerElement.parentElement;
+        
+        // 2. Trova tutti gli altri blocchi che hanno la classe 'area' (o quella che usi tu)
+        const allAreas = document.querySelectorAll('.area'); 
+
+        // 3. Chiudi tutti gli altri
+        allAreas.forEach(area => {
+            if (area !== currentArea) {
+                area.classList.remove('active');
+            }
+        });
+
+        // 4. Apri o chiudi solo quello cliccato
+        currentArea.classList.toggle('active');
     }
 </script>
 
