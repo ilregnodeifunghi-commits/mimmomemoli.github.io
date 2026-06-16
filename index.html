@@ -196,23 +196,22 @@
 
 <script>
     function toggleSection(bannerElement) {
-        // 1. Prendi il blocco corrente che è stato cliccato
+        // 1. Identifica il blocco che è stato cliccato
         const currentArea = bannerElement.parentElement;
         
-        // 2. Trova tutti gli altri blocchi che hanno la classe 'area' (o quella che usi tu)
-        const allAreas = document.querySelectorAll('.area'); 
+        // 2. Trova TUTTI gli elementi che hanno la classe 'macro-area'
+        const allAreas = document.querySelectorAll('.macro-area'); 
 
-        // 3. Chiudi tutti gli altri
+        // 3. Chiudi tutti quelli che non sono quello che abbiamo appena cliccato
         allAreas.forEach(area => {
             if (area !== currentArea) {
                 area.classList.remove('active');
             }
         });
 
-        // 4. Apri o chiudi solo quello cliccato
+        // 4. Apri/Chiudi il blocco corrente
         currentArea.classList.toggle('active');
     }
 </script>
-
 </body>
 </html>
