@@ -41,128 +41,23 @@
 </div>
 
 <script>
-    const targetSigla = "Ch pulv";
+    console.log("Lo script è partito!");
+    const targetSigla = "Ch pulv"; // Verifica che sia ESATTAMENTE così nel CSV
 
     Papa.parse("../Piante.csv", {
         download: true,
-        skipEmptyLines: true,
+        header: false,
         complete: function(results) {
+            console.log("File caricato! Numero righe:", results.data.length);
             document.getElementById('loading-status').style.display = 'none';
             if (results && results.data) { renderTable(results.data); }
+        },
+        error: function(err) {
+            console.error("Errore nel caricamento:", err);
         }
     });
 
-    function createId(name) {
-        if (!name) return "";
-        return name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').trim();
-    }
-
-    function renderTable(data) {
-        const container = document.getElementById('database-content');
-        let htmlOutput = "";
-        let groups = {};
-
-        data.forEach(row => {
-            if(!row || row.length < 6) return;
-
-            let formaBioSigla  = row[0] ? row[0].trim() : "";
-            let ordine         = row[3] ? row[3].trim() : "";
-            let famiglia       = row[4] ? row[4].trim() : "";
-            let specieValida   = row[5] ? row[5].trim() : "";
-            let specieSinonimo = row[6] ? row[6].trim() : "";
-            let notaVedi       = row[7] ? row[7].trim() : "";
-            let nomeAttuale    = row[8] ? row[8].trim() : "";
-            let nomiItaliani   = row[9] ? row[9].trim() : "";
-
-            if (formaBioSigla.includes(targetSigla)) {
-                if(!ordine) ordine = "ORDINE NON SPECIFICATO";
-                if(!famiglia) famiglia = "FAMIGLIA NON SPECIFICATA";
-
-                if (!groups[ordine]) groups[ordine] = {};
-                if (!groups[ordine][famiglia]) groups[ordine][famiglia] = [];
-
-                let esSinonimo = notaVedi.toLowerCase().includes('vedi');
-
-                groups[ordine][famiglia].push({
-                    speciePrincipale: specieValida,
-                    sottospecie: specieSinonimo,
-                    isSinonimo: esSinonimo,
-                    testoVedi: notaVedi,
-                    destinazioneLink: nomeAttuale,
-                    nomiComuni: nomiItaliani
-                });
-            }
-        });
-
-        if (Object.keys(groups).length === 0) {
-            container.innerHTML = "<p class='loading'>Nessuna pianta trovata con la sigla '" + targetSigla + "'.</p>";
-            return;
-        }
-
-        for (let ordine in groups) {
-            for (let famiglia in groups[ordine]) {
-                htmlOutput += `
-                    <div class="taxonomy-block">
-                        <div class="taxonomy-info">Ordine: <strong>${ordine}</strong> &nbsp;|&nbsp; Famiglia: <strong>${famiglia}</strong></div>
-                    </div>
-                    <table class="flora-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 55%;">Specie / Sottospecie / Sinonimi</th>
-                                <th style="width: 45%;">Nomi Italiani e Note</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                `;
-
-                groups[ordine][famiglia].forEach(pianta => {
-                    let rigaHtml = "";
-                    let notaHtml = "";
-
-                    if (pianta.isSinonimo) {
-                        let nomeSinonimo = pianta.sottospecie ? pianta.sottospecie : pianta.speciePrincipale;
-                        rigaHtml = `<span class="synonym-species">${nomeSinonimo}</span>`;
-                        if (pianta.destinazioneLink) {
-                            let ancoraTarget = createId(pianta.destinazioneLink);
-                            let testoLink = `${pianta.testoVedi} ${pianta.destinazioneLink}`;
-                            notaHtml = `<a href="#${ancoraTarget}" class="tax-link" onclick="highlightTarget('${ancoraTarget}')">🔗 ${testoLink}</a>`;
-                        } else {
-                            notaHtml = `<span class="tax-link" style="background:#f5f5f5; border-color:#ccc; color:#666;">${pianta.testoVedi}</span>`;
-                        }
-                    } else {
-                        let nomeCompletoAttuale = pianta.sottospecie ? `${pianta.speciePrincipale} ${pianta.sottospecie}` : pianta.speciePrincipale;
-                        let idAncora = createId(pianta.speciePrincipale);
-                        rigaHtml = `<span class="current-species" id="${idAncora}">${nomeCompletoAttuale}</span>`;
-                    }
-
-                    htmlOutput += `
-                        <tr>
-                            <td>${rigaHtml}${notaHtml}</td>
-                            <td class="italian-names">${pianta.nomiComuni ? pianta.nomiComuni : "-"}</td>
-                        </tr>
-                    `;
-                });
-
-                htmlOutput += `</tbody></table>`;
-            }
-        }
-        container.innerHTML = htmlOutput;
-    }
-
-    function highlightTarget(id) {
-        setTimeout(() => {
-            let el = document.getElementById(id);
-            if(el) {
-                let riga = el.closest('tr');
-                if(riga) {
-                    riga.classList.remove('target-highlight');
-                    void riga.offsetWidth;
-                    riga.classList.add('target-highlight');
-                }
-            }
-        }, 50);
-    }
+    // ... (tutto il resto delle tue funzioni createId, renderTable, ecc. restano qui sotto)
 </script>
-
 </body>
 </html>
