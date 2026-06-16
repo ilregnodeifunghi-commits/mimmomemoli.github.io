@@ -44,20 +44,18 @@
     const targetSigla = "Ch pulv"; // Assicurati che nel CSV sia scritto ESATTAMENTE così
 
     // Carichiamo il file dalla radice principale usando il percorso relativo corretto
-   Papa.parse("../Piante.csv", {
+   Papa.parse("/Piante.csv", {
     download: true,
+    delimiter: ";", // Prova ";" se i dati sono separati da punto e virgola, o "," se sono virgole
     skipEmptyLines: true,
-    // SE nel Blocco Note le colonne sono divise da una virgola, scrivi ','
-    // SE nel Blocco Note le colonne sono divise da un punto e virgola, scrivi ';'
-    delimiter: ";", 
     complete: function(results) {
-        console.log("Dati caricati, ecco cosa vedo:", results.data);
+        console.log("File caricato correttamente!");
         renderTable(results.data);
+    },
+    error: function(err, file, inputElem, reason) {
+        console.error("Errore di caricamento: il file non è stato trovato a questo indirizzo.");
     }
-});        error: function(err) {
-            console.error("Errore critico di caricamento:", err);
-            document.getElementById('loading-status').innerHTML = "Errore: file CSV non trovato. Controlla il percorso.";
-        }
+});
     });
 
     // ... (lascia qui sotto il resto delle tue funzioni: createId, renderTable, highlightTarget)
