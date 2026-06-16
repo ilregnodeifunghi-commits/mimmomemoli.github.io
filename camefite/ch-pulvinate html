@@ -44,7 +44,7 @@
     console.log("Lo script è partito!");
     const targetSigla = "Ch pulv"; // Verifica che sia ESATTAMENTE così nel CSV
 
-    Papa.parse("/Piante.csv", {
+    Papa.parse("Piante.csv", {
         download: true,
         header: false,
         complete: function(results) {
