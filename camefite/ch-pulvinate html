@@ -45,7 +45,7 @@
 
     // Carichiamo il file dalla radice principale usando il percorso relativo corretto
     Papa.parse("../Piante.csv", {
-        download: true,
+    download: true,
         skipEmptyLines: true,
         complete: function(results) {
             document.getElementById('loading-status').style.display = 'none';
