@@ -1,0 +1,17 @@
+/* style.css */
+body { 
+    background-color: #fdf5e6; /* Questo è il colore crema/arancio chiaro della tua Home */
+    font-family: sans-serif; 
+    margin: 0; padding: 20px; 
+}
+.container { 
+    max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; 
+}
+.btn-view { 
+    background-color: #d35400; /* Il colore del tuo tasto */
+    color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px; 
+}
+.nav-back { 
+    display: inline-block; margin-bottom: 20px; text-decoration: none; color: #d35400; font-weight: bold;
+}
+/* Aggiungi qui tutto il resto dello stile che avevi nella Home */
