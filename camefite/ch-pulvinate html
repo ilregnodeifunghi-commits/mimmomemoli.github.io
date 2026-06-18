@@ -47,7 +47,7 @@
   // Usa questo URL esatto:
 Papa.parse("https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.csv", {
     download: true,
-    delimiter: ";", // O "," se il tuo file usa la virgola
+    delimiter: ",", // O "," se il tuo file usa la virgola
     skipEmptyLines: true,
     complete: function(results) {
         console.log("File caricato correttamente!");
