@@ -12,26 +12,22 @@
     <div id="table-container"></div>
 
    <script>
-        // Il "../" è fondamentale perché il file è nella cartella superiore
-        const urlFile = "../Piante.txt";
+        // Incolla l'indirizzo qui dentro:
+        const urlFile = "https://ilregnodeifunghi-commits.github.io/Piante.csv";
 
         Papa.parse(urlFile, {
             download: true,
-            delimiter: ";", 
+            delimiter: ";", // Verifica che nel file CSV tu abbia usato il punto e virgola
             skipEmptyLines: true,
             complete: function(results) {
-                // Nasconde il messaggio di caricamento
                 document.getElementById('loading').style.display = 'none';
+                console.log("Dati caricati:", results.data);
                 
-                console.log("File caricato correttamente!");
-                
-                // Visualizzazione dei dati sulla pagina
                 const container = document.getElementById('table-container');
                 container.innerHTML = "<pre>" + JSON.stringify(results.data, null, 2) + "</pre>";
             },
             error: function(err) {
-                console.error("Errore nel caricamento:", err);
-                document.getElementById('loading').innerText = "Errore: impossibile caricare il file. Verifica il percorso.";
+                console.error("Errore:", err);
             }
         });
     </script></body>
