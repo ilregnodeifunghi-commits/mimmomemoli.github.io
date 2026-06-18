@@ -57,5 +57,5 @@ Papa.parse("https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnode
         console.error("ERRORE CRITICO DI PAPA-PARSE:", err);
         console.error("Motivo:", reason);
     }
-});</script></body>
+});});</script></body>
 </html>
