@@ -14,16 +14,7 @@
     <script>
         const urlCSV = "https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.csv";
 
-        Papa.parse("../Piante.csv", {
-    download: true,
-    delimiter: ";",
-    header: true, // Questo è importante se il tuo file ha i nomi delle colonne nella prima riga
-    complete: function(results) {
-        console.log("Successo! Dati:", results.data);
-    },
-    error: function(err) {
-        console.error("Errore, dettagli:", err);
-    }
+        Papa.parse("test.csv", { ... });
 });        });
     </script>
 </body>
