@@ -11,10 +11,11 @@
     <div id="table-container">Caricamento in corso...</div>
 
     <script>
-        // Questo è il link al tuo file CSV
-        const urlFile = "Piante.csv";
-
-        Papa.parse(urlFile, {
+        
+      alert("Il codice è partito!"); // Aggiungi questa riga!
+    const urlFile = "Piante.csv";
+        
+                Papa.parse(urlFile, {
             download: true,
             delimiter: ";",
             skipEmptyLines: true,
