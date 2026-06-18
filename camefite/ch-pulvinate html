@@ -2,63 +2,35 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camefite Pulvinate - Flora della Campania</title>
+    <title>Ch Pulvinate</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f2f6f3; color: #2b3a2f; padding: 30px 15px; }
-        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .back-btn { display: inline-block; text-decoration: none; color: #2e6f40; font-weight: bold; margin-bottom: 20px; }
-        h1 { color: #1e4b2b; margin-bottom: 5px; }
-        .sub-title { color: #687e6e; font-style: italic; margin-bottom: 35px; }
-        .taxonomy-block { background: #fafdfb; border: 1px solid #cfe2d4; border-left: 5px solid #2e6f40; border-radius: 6px; padding: 15px 20px; margin-top: 25px; margin-bottom: 10px; }
-        .taxonomy-info { font-size: 1rem; color: #4e5e52; }
-        .taxonomy-info strong { color: #1e4b2b; text-transform: uppercase; }
-        .flora-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-        .flora-table th { background: #edf4ef; text-align: left; padding: 12px; font-size: 0.9rem; color: #415647; border-bottom: 2px solid #cfe2d4; text-transform: uppercase; }
-        .flora-table td { padding: 16px 12px; border-bottom: 1px solid #edf4ef; font-size: 1.05rem; vertical-align: top; }
-        .current-species { font-family: 'Segoe UI', sans-serif; font-weight: bold; color: #1a365d; font-size: 1.2rem; display: block; scroll-margin-top: 20px; }
-        .synonym-species { font-style: italic; font-weight: normal; color: #c53030; font-size: 1.15rem; display: block; }
-        .tax-link { display: inline-block; font-size: 0.85rem; background: #fff5f5; border: 1px solid #feb2b2; color: #c53030; padding: 3px 8px; border-radius: 4px; margin-top: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s; }
-        .tax-link:hover { background: #fed7d7; text-decoration: underline; }
-        .italian-names { color: #2c3e50; line-height: 1.5; font-weight: 500; }
-        .loading { font-size: 1.2rem; color: #687e6e; font-style: italic; }
-        @keyframes highlight { 0% { background-color: #fff9db; } 100% { background-color: transparent; } }
-        .target-highlight { animation: highlight 2s ease-out; }
-    </style>
 </head>
 <body>
 
-<div class="container">
-    <a href="../index.html" class="nav-back">🏠 HOME</a>
-    
-    <h1>Camefite pulvinate (Ch pulv)</h1>
-    <p class="sub-title">Piante con accrescimento compatto, a forma di cuscinetto emisferico</p>
+    <h1>Ch Pulvinate</h1>
+    <div id="loading">Caricamento in corso...</div>
+    <div id="table-container"></div>
 
-    <div id="loading-status" class="loading">Caricamento delle piante in corso...</div>
-    <div id="database-content"></div>
-</div>
+    <script>
+        const urlCSV = "https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.csv";
 
-<script>
-    const targetSigla = "Ch pulv"; // Assicurati che nel CSV sia scritto ESATTAMENTE così
-
-    // Carichiamo il file dalla radice principale usando il percorso relativo corretto
-  // Usa questo URL esatto:
-Papa.parse("https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.csv", {
-    download: true,
-    delimiter: ";", 
-    complete: function(results) {
-        console.log("--- TEST DI LETTURA ---");
-        console.log("Dati letti:", results.data);
-        if (results.data.length > 0) {
-            console.log("La prima riga del file è:", results.data[0]);
-        } else {
-            console.log("Il file sembra vuoto!");
-        }
-    },
-    error: function(err) {
-        console.error("Errore di PapaParse:", err);
-    }
-});});});</script></body>
+        Papa.parse(urlCSV, {
+            download: true,
+            delimiter: ";", // Se non appare nulla, domani cambieremo in ","
+            skipEmptyLines: true,
+            complete: function(results) {
+                document.getElementById('loading').style.display = 'none';
+                console.log("File caricato correttamente!");
+                console.log("Righe totali:", results.data.length);
+                console.log("Prima riga:", results.data[0]);
+                
+                // Qui chiameremo la tua funzione renderTable
+                // Se non esiste ancora, la scriveremo insieme dopo
+            },
+            error: function(err) {
+                console.error("Errore nel caricamento del CSV:", err);
+            }
+        });
+    </script>
+</body>
 </html>
