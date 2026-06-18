@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Test Caricamento</title>
+    <title>Test Rapido</title>
 </head>
 <body>
-    <h1>Pagina di Test</h1>
-    <div id="debug">Se vedi questo, l'HTML funziona.</div>
-    <script>
-        console.log("Il JavaScript è partito!");
-        document.getElementById('debug').innerHTML += " E il JavaScript sta girando.";
-    </script>
+    <h1>La pagina è attiva!</h1>
+    <p>Se leggi questo, il problema è il caricamento dei dati.</p>
 </body>
 </html>
