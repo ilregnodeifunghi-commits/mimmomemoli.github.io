@@ -1,34 +1,15 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Ch Pulvinate</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <title>Test Caricamento</title>
 </head>
 <body>
-
-    <h1>Ch Pulvinate</h1>
-    <div id="loading">Caricamento in corso...</div>
-    <div id="table-container"></div>
-
-   <script>
-        // Incolla l'indirizzo qui dentro:
-        const urlFile = "https://ilregnodeifunghi-commits.github.io/Piante.csv";
-
-        Papa.parse(urlFile, {
-            download: true,
-            delimiter: ";", // Verifica che nel file CSV tu abbia usato il punto e virgola
-            skipEmptyLines: true,
-            complete: function(results) {
-                document.getElementById('loading').style.display = 'none';
-                console.log("Dati caricati:", results.data);
-                
-                const container = document.getElementById('table-container');
-                container.innerHTML = "<pre>" + JSON.stringify(results.data, null, 2) + "</pre>";
-            },
-            error: function(err) {
-                console.error("Errore:", err);
-            }
-        });
-    </script></body>
+    <h1>Pagina di Test</h1>
+    <div id="debug">Se vedi questo, l'HTML funziona.</div>
+    <script>
+        console.log("Il JavaScript è partito!");
+        document.getElementById('debug').innerHTML += " E il JavaScript sta girando.";
+    </script>
+</body>
 </html>
