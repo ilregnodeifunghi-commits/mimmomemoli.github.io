@@ -12,10 +12,29 @@
     <div id="table-container"></div>
 
     <script>
-        const urlCSV = "https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.csv";
+        // Utilizziamo il link RAW del file .txt che hai appena caricato
+        const urlFile = "https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.txt";
 
-        Papa.parse("test.csv", { ... });
-});        });
+        Papa.parse(urlFile, {
+            download: true,
+            delimiter: ";", // Assicurati che nel file .txt tu abbia usato ";" come separatore
+            skipEmptyLines: true,
+            complete: function(results) {
+                // Nasconde il messaggio di caricamento
+                document.getElementById('loading').style.display = 'none';
+                
+                console.log("File caricato correttamente!");
+                console.log("Righe trovate:", results.data);
+                
+                // Qui mostriamo i dati nella pagina
+                const container = document.getElementById('table-container');
+                container.innerHTML = "<pre>" + JSON.stringify(results.data, null, 2) + "</pre>";
+            },
+            error: function(err) {
+                console.error("Errore nel caricamento:", err);
+                document.getElementById('loading').innerText = "Errore: impossibile caricare il file.";
+            }
+        });
     </script>
 </body>
 </html>
