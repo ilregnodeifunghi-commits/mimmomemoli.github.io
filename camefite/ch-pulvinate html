@@ -47,15 +47,15 @@
   // Usa questo URL esatto:
 Papa.parse("https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.csv", {
     download: true,
-    delimiter: ",", // O "," se il tuo file usa la virgola
-    skipEmptyLines: true,
+    delimiter: ";", // Prova con ";"
     complete: function(results) {
-        console.log("File caricato correttamente!");
+        console.log("File letto con successo!");
+        console.log("Righe totali trovate:", results.data.length);
         renderTable(results.data);
     },
-    error: function(err) {
-        console.error("Errore di caricamento:", err);
+    error: function(err, file, inputElem, reason) {
+        console.error("ERRORE CRITICO DI PAPA-PARSE:", err);
+        console.error("Motivo:", reason);
     }
-});
-</script></body>
+});</script></body>
 </html>
