@@ -44,20 +44,18 @@
     const targetSigla = "Ch pulv"; // Assicurati che nel CSV sia scritto ESATTAMENTE così
 
     // Carichiamo il file dalla radice principale usando il percorso relativo corretto
-   Papa.parse("/Piante.csv", {
+  Papa.parse("https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.csv", {
     download: true,
-    delimiter: ";", // Prova ";" se i dati sono separati da punto e virgola, o "," se sono virgole
+    delimiter: ";", // O "," se il tuo file usa la virgola
     skipEmptyLines: true,
     complete: function(results) {
         console.log("File caricato correttamente!");
         renderTable(results.data);
     },
-    error: function(err, file, inputElem, reason) {
-        console.error("Errore di caricamento: il file non è stato trovato a questo indirizzo.");
+    error: function(err) {
+        console.error("Errore di caricamento:", err);
     }
 });
-    });
-
     // ... (lascia qui sotto il resto delle tue funzioni: createId, renderTable, highlightTarget)
 </script></body>
 </html>
