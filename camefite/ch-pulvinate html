@@ -14,23 +14,17 @@
     <script>
         const urlCSV = "https://raw.githubusercontent.com/ilregnodeifunghi-commits/ilregnodeifunghi-commits.github.io/main/Piante.csv";
 
-        Papa.parse(urlCSV, {
-            download: true,
-            delimiter: ";", // Se non appare nulla, domani cambieremo in ","
-            skipEmptyLines: true,
-            complete: function(results) {
-                document.getElementById('loading').style.display = 'none';
-                console.log("File caricato correttamente!");
-                console.log("Righe totali:", results.data.length);
-                console.log("Prima riga:", results.data[0]);
-                
-                // Qui chiameremo la tua funzione renderTable
-                // Se non esiste ancora, la scriveremo insieme dopo
-            },
-            error: function(err) {
-                console.error("Errore nel caricamento del CSV:", err);
-            }
-        });
+        Papa.parse("../Piante.csv", {
+    download: true,
+    delimiter: ";",
+    header: true, // Questo è importante se il tuo file ha i nomi delle colonne nella prima riga
+    complete: function(results) {
+        console.log("Successo! Dati:", results.data);
+    },
+    error: function(err) {
+        console.error("Errore, dettagli:", err);
+    }
+});        });
     </script>
 </body>
 </html>
