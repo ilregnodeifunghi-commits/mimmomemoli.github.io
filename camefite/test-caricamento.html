@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Caricamento</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+    <h1>Test caricamento dati</h1>
+    <div id="status">In attesa...</div>
+
+    <script>
+        // Usiamo ../ per tornare alla cartella principale (Root) dove c'è Piante.csv
+        const urlFile = "../Piante.csv"; 
+
+        Papa.parse(urlFile, {
+            download: true,
+            delimiter: ";",
+            header: true,
+            complete: function(results) {
+                console.log("Dati letti:", results.data);
+                document.getElementById('status').innerHTML = "Dati caricati! Controlla la console (F12).";
+            },
+            error: function(err) {
+                document.getElementById('status').innerHTML = "Errore: " + err;
+            }
+        });
+    </script>
+</body>
+</html>
