@@ -8,21 +8,22 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', sans-serif; background: #eef2f5; color: #1e293b; padding: 40px 20px; }
         .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .btn-home { display: inline-flex; align-items: center; padding: 12px 24px; background: #f59e0b; color: #1e293b; text-decoration: none; border-radius: 30px; font-weight: bold; margin-bottom: 25px; }
-        h1 { font-size: 2.2rem; color: #14532d; margin-bottom: 5px; }
-        .descr { font-style: italic; color: #64748b; margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; }
+        .btn-home { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; background: #f59e0b; color: #1e293b; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); transition: all 0.2s ease; margin-bottom: 25px; }
+        .btn-home:hover { background: #d97706; color: white; transform: translateY(-2px); }
+        h1 { font-size: 2.2rem; color: #14532d; margin-bottom: 20px; }
         .flora-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         .flora-table th { background: #f1f5f9; text-align: left; padding: 14px; font-weight: 700; color: #475569; border-bottom: 2px solid #cbd5e1; }
         .flora-table td { padding: 14px; border-bottom: 1px solid #e2e8f0; }
+        .flora-table tr:hover { background: #f8fafc; }
         .plant-link { color: #166534; font-weight: 700; font-style: italic; text-decoration: none; }
         .view-link { color: #166534; text-decoration: none; font-weight: 600; }
+        .view-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 <div class="container">
     <a href="../index.html" class="btn-home">🏠 HOME</a>
     <h1>Camefite Pulvinate (Ch pulv)</h1>
-    <p class="descr">Piante che formano cuscinetti compatti aderenti al suolo.</p>
     
     <table class="flora-table">
         <thead>
@@ -33,11 +34,11 @@
             </tr>
         </thead>
         <tbody>
-            <!-- AGGIUNGI QUI LE TUE RIGHE A MANO -->
+            <!-- Qui inserisci le tue piante -->
             <tr>
-                <td><a href="schede/tua-pianta.html" class="plant-link">Nome scientifico qui</a></td>
-                <td>Nome italiano qui</td>
-                <td><a href="schede/tua-pianta.html" class="view-link">Visualizza Scheda ➔</a></td>
+                <td><a href="#" class="plant-link">Nome Scientifico</a></td>
+                <td>Nome Italiano</td>
+                <td><a href="#" class="view-link">Visualizza Scheda ➔</a></td>
             </tr>
         </tbody>
     </table>
