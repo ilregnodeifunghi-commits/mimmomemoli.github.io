@@ -214,20 +214,41 @@
         currentArea.classList.toggle('active');
     }
 </script>
-    <script>
-    // Questa funzione legge il file CSV e stampa i dati nella console
-    Papa.parse("Piante.csv", {
-        download: true,
-        delimiter: ";",
-        header: true,
-        complete: function(results) {
-            console.log("Dati caricati:", results.data);
-            // Qui in futuro potremmo generare una tabella automatica
-        },
-        error: function(err) {
-            console.error("Errore nel caricamento del file:", err);
-        }
-    });
-</script>
-</body>
+  <script>
+        Papa.parse("Piante.csv", {
+            download: true,
+            delimiter: ";",
+            header: true,
+            complete: function(results) {
+                console.log("Dati caricati:", results.data);
+                
+                // Crea il contenitore della tabella se non esiste
+                let container = document.getElementById('table-output');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = 'table-output';
+                    container.style.marginTop = "40px";
+                    container.style.padding = "20px";
+                    container.style.backgroundColor = "white";
+                    document.querySelector('.container').appendChild(container);
+                }
+
+                // Genera la tabella HTML
+                let html = "<h2 style='margin-bottom:15px;'>Anteprima Dati:</h2><table style='width:100%; border-collapse:collapse;'>";
+                // Intestazioni
+                html += "<tr><th style='border:1px solid #ccc; padding:8px;'>Colonna 1</th><th style='border:1px solid #ccc; padding:8px;'>Colonna 2</th></tr>";
+                // Righe
+                results.data.forEach(row => {
+                    html += "<tr><td style='border:1px solid #ccc; padding:8px;'>" + (row.TestColonna1 || "") + "</td>" +
+                            "<td style='border:1px solid #ccc; padding:8px;'>" + (row.TestColonna2 || "") + "</td></tr>";
+                });
+                html += "</table>";
+                
+                container.innerHTML = html;
+            },
+            error: function(err) {
+                console.error("Errore nel caricamento:", err);
+            }
+        });
+    </script></body>
 </html>
