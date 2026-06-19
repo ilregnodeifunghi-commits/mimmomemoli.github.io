@@ -227,16 +227,17 @@
         header: true,
         complete: function(results) {
             const resultsDiv = document.getElementById('results');
-            // Filtra le righe dove la colonna "Sigla" è uguale a "Ch rept"
-            const datiFiltrati = results.data.filter(row => row.Sigla === categoriaDaCercare);
+            
+            // FILTRO: cerchiamo la corrispondenza nella colonna "Forma biologica"
+            const datiFiltrati = results.data.filter(row => row["Forma biologica"] === categoriaDaCercare);
 
             if (datiFiltrati.length === 0) {
-                resultsDiv.innerHTML = "Nessuna pianta trovata con la sigla '" + categoriaDaCercare + "'.";
+                resultsDiv.innerHTML = "<p>Nessuna pianta trovata con la sigla '" + categoriaDaCercare + "'.</p>";
             } else {
                 let html = "<table style='width:100%; border-collapse:collapse;'>";
-                // Qui aggiungi le colonne che vuoi vedere (es: Nome e Descrizione)
+                // Esempio: visualizziamo il nome della pianta (assumendo che la colonna si chiami "Nome")
                 datiFiltrati.forEach(row => {
-                    html += "<tr><td style='padding:10px; border-bottom:1px solid #eee;'>" + row.Nome + "</td></tr>";
+                    html += "<tr><td style='padding:15px; border-bottom:1px solid #e2e8f0; font-size: 1.1rem;'>" + (row.Nome || "Nome non specificato") + "</td></tr>";
                 });
                 html += "</table>";
                 resultsDiv.innerHTML = html;
