@@ -214,15 +214,14 @@
         currentArea.classList.toggle('active');
     }
 </script>
-  <script>
+<script>
         Papa.parse("Piante.csv", {
             download: true,
             delimiter: ";",
             header: true,
             complete: function(results) {
-                console.log("Dati caricati:", results.data);
+                if (results.data.length === 0) return;
                 
-                // Crea il contenitore della tabella se non esiste
                 let container = document.getElementById('table-output');
                 if (!container) {
                     container = document.createElement('div');
@@ -233,22 +232,21 @@
                     document.querySelector('.container').appendChild(container);
                 }
 
-                // Genera la tabella HTML
+                const headers = Object.keys(results.data[0]);
                 let html = "<h2 style='margin-bottom:15px;'>Anteprima Dati:</h2><table style='width:100%; border-collapse:collapse;'>";
-                // Intestazioni
-                html += "<tr><th style='border:1px solid #ccc; padding:8px;'>Colonna 1</th><th style='border:1px solid #ccc; padding:8px;'>Colonna 2</th></tr>";
-                // Righe
-                results.data.forEach(row => {
-                    html += "<tr><td style='border:1px solid #ccc; padding:8px;'>" + (row.TestColonna1 || "") + "</td>" +
-                            "<td style='border:1px solid #ccc; padding:8px;'>" + (row.TestColonna2 || "") + "</td></tr>";
-                });
-                html += "</table>";
                 
+                // Intestazioni dinamiche
+                html += "<tr>" + headers.map(h => `<th style='border:1px solid #ccc; padding:8px;'>${h}</th>`).join('') + "</tr>";
+                
+                // Righe dinamiche
+                results.data.forEach(row => {
+                    html += "<tr>" + headers.map(h => `<td style='border:1px solid #ccc; padding:8px;'>${row[h] || ""}</td>`).join('') + "</tr>";
+                });
+                
+                html += "</table>";
                 container.innerHTML = html;
-            },
-            error: function(err) {
-                console.error("Errore nel caricamento:", err);
             }
         });
-    </script></body>
+    </script>
+</body>
 </html>
