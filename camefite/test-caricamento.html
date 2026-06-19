@@ -7,24 +7,51 @@
 </head>
 <body>
     <h1>Test caricamento dati</h1>
-    <div id="status">In attesa...</div>
+  <div id="table-display">Caricamento in corso...</div>
 
-    <script>
-        // Usiamo ../ per tornare alla cartella principale (Root) dove c'è Piante.csv
-        const urlFile = "../Piante.csv"; 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+<script>
+    // Usiamo ../ per tornare alla cartella principale (Root)
+    const urlFile = "../Piante.csv"; 
 
-        Papa.parse(urlFile, {
-            download: true,
-            delimiter: ";",
-            header: true,
-            complete: function(results) {
-                console.log("Dati letti:", results.data);
-                document.getElementById('status').innerHTML = "Dati caricati! Controlla la console (F12).";
-            },
-            error: function(err) {
-                document.getElementById('status').innerHTML = "Errore: " + err;
+    Papa.parse(urlFile, {
+        download: true,
+        delimiter: ";",
+        header: true,
+        complete: function(results) {
+            const display = document.getElementById('table-display');
+            if (results.data.length === 0) {
+                display.innerHTML = "Nessun dato trovato nel file.";
+                return;
             }
-        });
-    </script>
+
+            // Inizia a creare la tabella
+            let html = "<table style='width:100%; border-collapse:collapse; margin-top:20px;'>";
+            
+            // Crea l'intestazione basata sulle colonne del CSV
+            const headers = Object.keys(results.data[0]);
+            html += "<tr style='background:#f1f5f9;'>";
+            headers.forEach(h => {
+                html += "<th style='border:1px solid #ccc; padding:10px; text-align:left;'>" + h + "</th>";
+            });
+            html += "</tr>";
+
+            // Crea le righe
+            results.data.forEach(row => {
+                html += "<tr>";
+                headers.forEach(h => {
+                    html += "<td style='border:1px solid #ccc; padding:8px;'>" + (row[h] || "") + "</td>";
+                });
+                html += "</tr>";
+            });
+            
+            html += "</table>";
+            display.innerHTML = html;
+        },
+        error: function(err) {
+            document.getElementById('table-display').innerHTML = "Errore nel caricamento: " + err;
+        }
+    });
+</script>
 </body>
 </html>
