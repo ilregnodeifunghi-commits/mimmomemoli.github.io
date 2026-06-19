@@ -216,5 +216,33 @@
         currentArea.classList.toggle('active');
     }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+<script>
+    // CAMBIA QUESTA SIGLA A SECONDA DELLA PAGINA
+    const categoriaDaCercare = "Ch rept"; 
+
+    Papa.parse("../Piante.csv", {
+        download: true,
+        delimiter: ";",
+        header: true,
+        complete: function(results) {
+            const resultsDiv = document.getElementById('results');
+            // Filtra le righe dove la colonna "Sigla" è uguale a "Ch rept"
+            const datiFiltrati = results.data.filter(row => row.Sigla === categoriaDaCercare);
+
+            if (datiFiltrati.length === 0) {
+                resultsDiv.innerHTML = "Nessuna pianta trovata con la sigla '" + categoriaDaCercare + "'.";
+            } else {
+                let html = "<table style='width:100%; border-collapse:collapse;'>";
+                // Qui aggiungi le colonne che vuoi vedere (es: Nome e Descrizione)
+                datiFiltrati.forEach(row => {
+                    html += "<tr><td style='padding:10px; border-bottom:1px solid #eee;'>" + row.Nome + "</td></tr>";
+                });
+                html += "</table>";
+                resultsDiv.innerHTML = html;
+            }
+        }
+    });
+</script>
 </body>
 </html>
