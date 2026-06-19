@@ -76,6 +76,7 @@
         @media (max-width: 1200px) { .dashboard-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; gap: 20px; } .header-box h1 { font-size: 2.2rem; } }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 <body>
 
@@ -212,6 +213,21 @@
         // 4. Apri/Chiudi il blocco corrente
         currentArea.classList.toggle('active');
     }
+</script>
+    <script>
+    // Questa funzione legge il file CSV e stampa i dati nella console
+    Papa.parse("Piante.csv", {
+        download: true,
+        delimiter: ";",
+        header: true,
+        complete: function(results) {
+            console.log("Dati caricati:", results.data);
+            // Qui in futuro potremmo generare una tabella automatica
+        },
+        error: function(err) {
+            console.error("Errore nel caricamento del file:", err);
+        }
+    });
 </script>
 </body>
 </html>
