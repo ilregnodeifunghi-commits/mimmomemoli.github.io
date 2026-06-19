@@ -218,30 +218,19 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 <script>
-    // CAMBIA QUESTA SIGLA A SECONDA DELLA PAGINA
-    const categoriaDaCercare = "Ch rept"; 
+    // Se la pagina è dentro una cartella, ../Piante.csv è corretto.
+    // Se l'errore persiste, prova a mettere il link diretto:
+    const urlFile = "../Piante.csv"; 
 
-    Papa.parse("../Piante.csv", {
+    Papa.parse(urlFile, {
         download: true,
         delimiter: ";",
         header: true,
         complete: function(results) {
-            const resultsDiv = document.getElementById('results');
-            
-            // FILTRO: cerchiamo la corrispondenza nella colonna "Forma biologica"
-            const datiFiltrati = results.data.filter(row => row["Forma biologica"] === categoriaDaCercare);
-
-            if (datiFiltrati.length === 0) {
-                resultsDiv.innerHTML = "<p>Nessuna pianta trovata con la sigla '" + categoriaDaCercare + "'.</p>";
-            } else {
-                let html = "<table style='width:100%; border-collapse:collapse;'>";
-                // Esempio: visualizziamo il nome della pianta (assumendo che la colonna si chiami "Nome")
-                datiFiltrati.forEach(row => {
-                    html += "<tr><td style='padding:15px; border-bottom:1px solid #e2e8f0; font-size: 1.1rem;'>" + (row.Nome || "Nome non specificato") + "</td></tr>";
-                });
-                html += "</table>";
-                resultsDiv.innerHTML = html;
-            }
+            // ... (codice per visualizzare i dati) ...
+        },
+        error: function(err) {
+            console.error("Errore 404 - File non trovato a questo indirizzo:", urlFile);
         }
     });
 </script>
