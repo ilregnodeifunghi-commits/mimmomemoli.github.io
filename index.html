@@ -3,169 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achillea tenorei Grande - Flora Digitalis</title>
+    <title>Flora della Campania</title>
     <style>
-        /* STILI GENERALI (RESET E COLORI) */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f5; padding-bottom: 60px; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #2b3a2f; background-color: #f3f7f4; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #e1e9e3; }
         
-        /* HEADER / INTESTAZIONE */
-        header { background-color: #2c5e3b; color: white; padding: 30px 20px; text-align: center; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        header h1 { font-style: italic; font-size: 2.2rem; margin-bottom: 5px; }
-        header .sub-title { font-size: 1.1rem; opacity: 0.9; font-weight: bold; }
-        header .family { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; opacity: 0.8; }
+        /* Intestazione Richiesta */
+        header { text-align: center; border-bottom: 3px solid #2e6f40; padding-bottom: 25px; margin-bottom: 30px; }
+        header h1 { color: #1e4b2b; font-size: 2.6rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+        header p { color: #516857; font-size: 1.3rem; font-style: italic; font-weight: 500; }
 
-        /* STRUTTURA A DUE COLONNE (GALLERIA E TESTI) */
-        .main-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
-        @media (min-width: 850px) { .main-grid { grid-template-columns: 450px 1fr; } }
+        /* Sezione Suggerita: Statistiche e Ricerca Veloce */
+        .dashboard { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 35px; }
+        @media (min-width: 768px) { .dashboard { grid-template-columns: 2fr 1fr; } }
+        .search-box { background: #edf4ef; padding: 20px; border-radius: 8px; border: 1px solid #cfe2d4; display: flex; flex-direction: column; justify-content: center; }
+        .search-box label { font-weight: bold; color: #1e4b2b; margin-bottom: 8px; font-size: 0.95rem; }
+        .search-box input { padding: 10px 15px; border: 1px solid #abbfb0; border-radius: 6px; font-size: 1rem; color: #2b3a2f; }
+        .search-box input:focus { outline: none; border-color: #2e6f40; box-shadow: 0 0 0 3px rgba(46,111,64,0.1); }
+        .stats-box { background: #1e4b2b; color: #eaf2ec; padding: 20px; border-radius: 8px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+        .stats-count { font-size: 2rem; font-weight: bold; color: #ffffff; }
 
-        /* COLONNA SINISTRA: GALLERIA BOTANICA SEZIONATA */
-        .botanical-gallery { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e6e2; box-shadow: 0 2px 4px rgba(0,0,0,0.05); height: fit-content; }
-        .gallery-title { font-size: 1.1rem; color: #2c5e3b; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #2c5e3b; padding-bottom: 5px; }
-        .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .photo-card { background: #f9fbf9; border: 1px solid #d0dad2; border-radius: 6px; overflow: hidden; text-align: center; font-size: 0.85rem; font-weight: bold; color: #555; }
-        .photo-box { height: 140px; background-color: #e2ebe4; display: flex; align-items: center; justify-content: center; color: #8fa393; font-style: italic; font-weight: normal; border-bottom: 1px solid #d0dad2; position: relative; }
-        .photo-card span { display: block; padding: 6px 4px; background: white; }
-        /* Il riquadro della pianta intera occupa due colonne per importanza */
-        .photo-card.full-plant { grid-column: span 2; }
-        .photo-card.full-plant .photo-box { height: 220px; }
+        /* Sezione Suggerita: Contesto Botanico */
+        .info-panel { background: #fafdfb; border: 1px solid #d8ebdcd9; border-left: 5px solid #2e6f40; padding: 20px; border-radius: 4px; margin-bottom: 35px; font-size: 0.95rem; text-align: justify; }
+        .info-panel h3 { color: #1e4b2b; margin-bottom: 8px; }
 
-        /* COLONNA DESTRA: SCHEDA SCHEMATICA DATI */
-        .botanical-info { background: white; padding: 25px; border-radius: 8px; border: 1px solid #e0e6e2; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .section-block { margin-bottom: 25px; }
-        .section-block:last-child { margin-bottom: 0; }
-        .section-block h2 { color: #2c5e3b; font-size: 1.3rem; margin-bottom: 10px; border-bottom: 1px solid #d0dad2; padding-bottom: 4px; display: flex; align-items: center; }
-        .section-block h2::before { content: "🌿"; margin-right: 8px; font-size: 1.1rem; }
+        /* Griglia dei Menu a Discesa (Accordion) */
+        .accordion-container { display: flex; flex-direction: column; gap: 15px; }
+        .accordion-item { border: 1px solid #d2e1d6; border-radius: 8px; overflow: hidden; background: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.01); }
+        .accordion-header { background: #2e6f40; color: white; padding: 16px 20px; font-size: 1.25rem; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; user-select: none; }
+        .accordion-header:hover { background: #255933; }
+        .accordion-header::after { content: '▼'; font-size: 0.8rem; transition: transform 0.3s; }
+        .accordion-item.active .accordion-header::after { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: #fafdfb; border-top: 1px solid #edf4ef; }
         
-        /* Liste ed elenchi */
-        ul { list-style-type: none; }
-        li { margin-bottom: 8px; padding-left: 15px; position: relative; }
-        li::before { content: "•"; color: #2c5e3b; font-weight: bold; font-size: 1.2rem; position: absolute; left: 0; top: -2px; }
-        strong { color: #111; }
-        p { margin-bottom: 12px; text-align: justify; }
-
-        /* Badge evidenziati */
-        .badge-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .badge { background: #e2ebe4; color: #2c5e3b; padding: 4px 10px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; border: 1px solid #cbdcd0; }
-        .badge.alert { background: #fff1f1; color: #c92a2a; border-color: #ffc9c9; }
+        /* Struttura Sottoclassi e Tabelle Interno Menu */
+        .subclass-group { margin-bottom: 25px; background: white; border: 1px solid #e1e9e3; border-radius: 6px; padding: 15px; }
+        .subclass-group:last-child { margin-bottom: 0; }
+        .subclass-title { font-size: 1.05rem; font-weight: bold; color: #1e4b2b; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px dashed #cfe2d4; display: flex; align-items: center; }
+        .subclass-title::before { content: "❖"; margin-right: 8px; color: #2e6f40; }
+        
+        .flora-table { width: 100%; border-collapse: collapse; }
+        .flora-table th { background: #edf4ef; text-align: left; padding: 10px 12px; font-size: 0.88rem; color: #415647; font-weight: bold; border-bottom: 2px solid #cfe2d4; }
+        .flora-table td { padding: 12px; border-bottom: 1px solid #edf4ef; font-size: 0.95rem; vertical-align: top; }
+        .flora-table tr:last-child td { border-bottom: none; }
+        .flora-table tr:hover td { background: #f4faf6; }
+        
+        .botanical-link { font-weight: bold; }
+        .botanical-link a { color: #2e6f40; text-decoration: none; font-style: italic; }
+        .botanical-link a:hover { text-decoration: underline; }
+        .synonyms-span { display: block; font-size: 0.82rem; color: #687e6e; font-weight: normal; margin-top: 4px; }
+        .common-span { color: #333; display: block; }
+        .no-data { color: #7a9281; font-style: italic; font-size: 0.9rem; padding: 5px 0; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        
-        <!-- HEADER DELLA PIANTA -->
+        <!-- Intestazione del Sito -->
         <header>
-            <h1>Achillea tenorei Grande</h1>
-            <div class="sub-title">Nome comune: Achillea di Tenore, Millefoglio di Tenore</div>
-            <div class="family">Famiglia: Asteraceae (Compositae)</div>
+            <h1>Flora della Campania</h1>
+            <p>Alberi, arbusti, erbe e fiori selvatici della Campania</p>
         </header>
 
-        <!-- CONTENUTO PRINCIPALE -->
-        <div class="main-grid">
-            
-            <!-- SINISTRA: GALLERIA FOTOGRAFICA SEZIONATA -->
-            <aside class="botanical-gallery">
-                <div class="gallery-title">Galleria Fotografica Organizzata</div>
-                <div class="photo-grid">
-                    
-                    <!-- 1. Pianta Intera -->
-                    <div class="photo-card full-plant">
-                        <div class="photo-box">[ Inserisci Foto: Pianta Intera / Portamento ]</div>
-                        <span>Pianta Intera / Portamento</span>
-                    </div>
-                    
-                    <!-- 2. Fusto e Rami -->
-                    <div class="photo-card">
-                        <div class="photo-box">[ Foto: Fusto e Rami ]</div>
-                        <span>Fusto e Rami</span>
-                    </div>
-                    
-                    <!-- 3. Fogliame -->
-                    <div class="photo-card">
-                        <div class="photo-box">[ Foto: Fogliame ]</div>
-                        <span>Fogliame</span>
-                    </div>
-                    
-                    <!-- 4. Fiori -->
-                    <div class="photo-card">
-                        <div class="photo-box">[ Foto: Fiori / Infiorescenza ]</div>
-                        <span>Fiori & Infiorescenza</span>
-                    </div>
-                    
-                    <!-- 5. Frutti -->
-                    <div class="photo-card">
-                        <div class="photo-box">[ Foto: Frutti / Semi ]</div>
-                        <span>Frutti & Semi</span>
-                    </div>
-                    
-                    <!-- 6. Apparato Radicale -->
-                    <div class="photo-card full-plant">
-                        <div class="photo-box">[ Foto: Apparato Radicale / Rizoma ]</div>
-                        <span>Apparato Radicale / Rizoma</span>
-                    </div>
+        <!-- Sezioni Suggerite: Dashboard Ricerca e Statistiche -->
+        <div class="dashboard">
+            <div class="search-box">
+                <label purchasers="search-input">Cerca una pianta nell'archivio:</label>
+                <input type="text" id="search-input" placeholder="Es. Achillea, Adriala, pelosella..." onkeyup="filtraPiante()">
+            </div>
+            <div class="stats-box">
+                <div class="stats-count" id="global-count">2</div>
+                <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Specie Censite Totale</div>
+            </div>
+        </div>
 
-                </div>
-            </aside>
+        <!-- Sezione Suggerita: Contesto Scientifico -->
+        <div class="info-panel">
+            <h3>La classificazione biologica del territorio</h3>
+            <p>Questo archivio adotta lo schema delle <strong>Forme Biologiche di Raunkiær</strong>. Classificare la flora spontanea della Campania in base alla posizione delle gemme durante la stagione avversa permette di comprendere profondamente gli adattamenti ecologici e microclimatici presenti dalle coste tirreniche fino alle vette dell'Appennino campano.</p>
+        </div>
 
-            <!-- DESTRA: SCHEDA SCIENTIFICA COMPLETA -->
-            <main class="botanical-info">
-                
-                <div class="section-block">
-                    <h2>Inquadramento Tassonomico</h2>
-                    <p>La <strong>Achillea tenorei Grande</strong> è un'entità botanica di straordinario valore scientifico, espressione dell'endemismo d'alta quota della penisola italiana. Dal punto di vista della moderna sistematica vegetale, questa entità è strettamente correlata al polimorfo aggregato di <strong>Achillea barrelieri (Ten.) Sch.Bip.</strong>, del quale rappresenta un sinonimo o una razza geografica altomontana.</p>
-                    <div class="badge-list">
-                        <div class="badge">Ploidia: Diploide</div>
-                        <div class="badge">Genere: Achillea</div>
-                        <div class="badge">Specie: A. tenorei</div>
+        <!-- Contenitore Principale Menu a Discesa (Accordion) -->
+        <div class="accordion-container">
+
+            <!-- 1. FANEROFITE -->
+            <div class="accordion-item">
+                <div class="accordion-header">🪵 Fanerofite</div>
+                <div class="accordion-content">
+                    <div class="subclass-group">
+                        <div class="subclass-title">F. arboree</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">F. cespugliose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">F. striscianti</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">F. succulente</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">F. epifite</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">F. fruticose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="section-block">
-                    <h2>Caratteristiche Generali e Distintive</h2>
-                    <ul>
-                        <li><strong>Tipo di pianta:</strong> Erbacea perenne, emicrittofita scaposa.</li>
-                        <li><strong>Pianta e Portamento:</strong> Sviluppa fusti fioriferi eretti o ascendenti, rigidetti, alti mediamente tra <strong>15 e 40 cm</strong>. I fusti sono cilindrici, debolmente striati e provvisti di una fine pubescenza.</li>
-                        <li><strong>Foglie:</strong> Alterne lungo il fusto, mentre alla base formano dense rosette svernanti. La lamina ha un profilo da lineare a strettamente lanceolato ed è <strong>pennatosetta</strong>. I segmenti sono brevi, acuti e ordinati, di un colore verde vivo.</li>
-                        <li><strong>Fiori:</strong> Infiorescenza terminale a corimbo composto, lasso. Capolini di 5-7 mm di diametro. I fiori ligulati esterni (generalmente 5) sono di colore <strong>bianco-candido</strong>, mentre i fiori tubulosi centrali sono piccolissimi e di colore <strong>giallo-crema</strong>.</li>
-                        <li><strong>Periodo di fioritura:</strong> Fiorisce nel cuore dell'estate, tra <strong>luglio e agosto</strong>.</li>
-                        <li><strong>Frutto:</strong> Achenio oblungo, compresso e liscio, privo di pappo.</li>
-                    </ul>
-                </div>
-
-                <div class="section-block">
-                    <h2>Origine, Corologia e Habitat</h2>
-                    <ul>
-                        <li><strong>Origine:</strong> <strong>Endemica italiana</strong> (esclusiva del territorio italiano).</li>
-                        <li><strong>Corologia:</strong> Endemica Appenninica.</li>
-                        <li><strong>Habitat d'elezione:</strong> Specie eliofila e orofila. Vegeta nella fascia montana superiore, subalpina e alpina, tra <strong>1200 e 2200 m s.l.m.</strong> Si trova su <strong>ghiaioni instabili, ravaneti, macereti, pietraie, pascoli rasi e fessure delle rocce calcaree</strong>. Esige suoli primitivi e perfettamente drenati.</li>
-                    </ul>
-                </div>
-
-                <div class="section-block">
-                    <h2>Proprietà ed Utilizzi</h2>
-                    <ul>
-                        <li><strong>Officinali:</strong> Uso tradizionale locale. Possiede proprietà <strong>vulnerarie (cicatrizzanti), toniche e digestive</strong> analoghe alle altre achillee montane; storicamente usata dai pastori per infusi d'alta quota.</li>
-                        <li><strong>Alimentari:</strong> Nessun uso significativo a causa della consistenza coriacea e del sapore marcatamente amaro.</li>
-                        <li><strong>Ornamentali:</strong> Interessante potenziale per il giardinaggio alpino ed ecologico (rock gardens, aiuole alpine e muretti a secco). Mostra ottima resistenza al freddo e alla siccità (Xerogardening).</li>
-                        <li><strong>Tossicità:</strong> Generalmente non tossica. Può causare <strong>dermatiti allergiche da contatto</strong> in soggetti particolarmente sensibili alle Asteraceae a causa dei lattoni sesquiterpenici. Sconsigliata in gravidanza o con farmaci anticoagulanti.</li>
-                        <li><strong>Ecologici:</strong> Svolge un ruolo cruciale come <strong>pianta pioniera</strong> per la stabilizzazione dei ghiaioni montani. I fiori sono un'importante fonte di nettare per insetti d'alta quota.</li>
-                    </ul>
-                </div>
-
-                <div class="section-block">
-                    <h2>Distribuzione in Italia e Protezione</h2>
-                    <p>La specie è autoctona ed endemica della <strong>catena appenninica centrale e meridionale</strong>. Le sue popolazioni si concentrano sui massicci montuosi di <strong>Abruzzo, Molise, Lazio, Campania e Basilicata</strong>.</p>
-                    <div class="badge-list">
-                        <div class="badge">Areale: Frammentato / Ristretto</div>
-                        <div class="badge alert">Protezione: Divieto di raccolta nei Parchi Nazionali</div>
+            <!-- 2. CAMEFITE -->
+            <div class="accordion-item">
+                <div class="accordion-header">🌱 Camefite</div>
+                <div class="accordion-content">
+                    <div class="subclass-group">
+                        <div class="subclass-title">Ch. Suffruticose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">Ch. Scapose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">Ch. Reptanti</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">Ch. Pulvinate</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">Ch. fruticose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">Ch. sarmentose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
                     </div>
                 </div>
+            </div>
 
-            </main>
+            <!-- 3. TEROFITE -->
+            <div class="accordion-item">
+                <div class="accordion-header">🌾 Terofite</div>
+                <div class="accordion-content">
+                    <div class="subclass-group">
+                        <div class="subclass-title">T. scapose</div>
+                        <table class="flora-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%;">Nome Scientifico</th>
+                                    <th style="width: 50%;">Nomi Comuni / Regionali</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="pianta-row">
+                                    <td class="botanical-link">
+                                        <a href="andryala.html">Andryala dentata Sm.</a>
+                                        <span class="synonyms-span">Syn: <i>Andryala integrifolia</i> L., <i>Andryala sinuata</i> L.</span>
+                                    </td>
+                                    <td><span class="common-span">Adriala dentata, Lanutella dentata, Pelosella, Lanolina</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">T. cespitose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">T. rosulate</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">T. parassite</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. GEOFITE -->
+            <div class="accordion-item">
+                <div class="accordion-header">🧅 Geofite</div>
+                <div class="accordion-content">
+                    <div class="subclass-group">
+                        <div class="subclass-title">G. bulbose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">G. rizomatose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">G. radicigemmate</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">G. parassite</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. EMICRITTOFITE -->
+            <div class="accordion-item">
+                <div class="accordion-header">🌿 Emicriptofite</div>
+                <div class="accordion-content">
+                    <div class="subclass-group">
+                        <div class="subclass-title">E. biennali</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">E. cespitose</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">E. scapose</div>
+                        <table class="flora-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%;">Nome Scientifico</th>
+                                    <th style="width: 50%;">Nomi Comuni / Regionali</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="pianta-row">
+                                    <td class="botanical-link">
+                                        <a href="achillea.html">Achillea tenorei Grande</a>
+                                        <span class="synonyms-span">Syn: <i>Achillea mucronulata</i> Bertol.</span>
+                                    </td>
+                                    <td><span class="common-span">Millefoglio di Tenore</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">E. reptanti</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">E. rosulate</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">E. scandenti</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. IDROFITE -->
+            <div class="accordion-item">
+                <div class="accordion-header">💧 Idrofite</div>
+                <div class="accordion-content">
+                    <div class="subclass-group">
+                        <div class="subclass-title">I. natanti</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                    <div class="subclass-group">
+                        <div class="subclass-title">I. radicanti</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa sottoclasse.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. ELOFITE -->
+            <div class="accordion-item">
+                <div class="accordion-header">🌱 Elofite</div>
+                <div class="accordion-content">
+                    <div class="subclass-group">
+                        <div class="subclass-title">Elofite</div>
+                        <div class="no-data">Nessuna specie ancora registrata in questa categoria (piante di palude).</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
+    <!-- Script Logico Interattivo -->
+    <script>
+        // Logica per aprire e chiudere i menu a discesa
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+                const content = item.querySelector('.accordion-content');
+                if (item.classList.contains('active')) {
+                    content.style.display = 'block';
+                } else {
+                    content.style.display = 'none';
+                }
+            });
+        });
+
+        // Funzione per la ricerca istantanea suggerita
+        function filtraPiante() {
+            const input = document.getElementById('search-input').value.toLowerCase();
+            const rows = document.querySelectorAll('.pianta-row');
+            
+            rows.forEach(row => {
+                const testo = row.innerText.toLowerCase();
+                if (testo.includes(input)) {
+                    row.style.display = '';
+                    // Se trova una corrispondenza, apre automaticamente il menu che la contiene
+                    let parentContent = row.closest('.accordion-content');
+                    if(parentContent && input.length > 1) {
+                        parentContent.style.display = 'block';
+                        parentContent.parentElement.classList.add('active');
+                    }
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
