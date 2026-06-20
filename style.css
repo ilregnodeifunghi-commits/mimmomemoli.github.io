@@ -1,85 +1,17 @@
-/* style.css */
-body { 
-    background-color: #fdf5e6; /* Questo è il colore crema/arancio chiaro della tua Home */
-    font-family: sans-serif; 
-    margin: 0; padding: 20px; 
-}
-.container { 
-    max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; 
-}
-.btn-view { 
-    background-color: #d35400; /* Il colore del tuo tasto */
-    color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px; 
-}
-.nav-back { 
-    display: inline-block; margin-bottom: 20px; text-decoration: none; color: #d35400; font-weight: bold;
-}
-/* Aggiungi qui tutto il resto dello stile che avevi nella Home */
-
-.grid-buttons {
+.grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
-    margin-top: 20px;
+    padding: 20px;
 }
 
-.card-link {
-    display: block;
-    background: #ffffff;
+/* Aspetto della singola scheda */
+.card {
+    background-color: #fff9f0; /* Il colore di fondo che desideravi */
+    border: 1px solid #d35400;
     padding: 15px;
-    border: 1px solid #ddd;
+    text-align: center;
     border-radius: 8px;
     text-decoration: none;
     color: #333;
-    transition: transform 0.2s;
 }
-
-.card-link:hover {
-    transform: translateY(-5px);
-    border-color: #d35400;
-}
-
-.card-link h3 {
-    margin: 0 0 10px 0;
-    color: #d35400;
-}
-
-.card-link p {
-    margin: 0;
-    font-size: 0.9em;
-}
-
-<div class="container">
-    <h1>Flora della Campania</h1>
-
-    <details class="macro-area">
-        <summary>Fanerofite (P)</summary>
-        <div class="sub-menu">
-            <a href="fanerofite/p-nanofanerofite.html">NP - Nanofanerofite</a>
-            <a href="fanerofite/p-scapose.html">P scap - Scapose</a>
-            <a href="fanerofite/p-cespitose.html">P caesp - Cespitose</a>
-            <a href="fanerofite/p-lianose.html">P lian - Lianose</a>
-            <a href="fanerofite/p-reptanti.html">P rept - Reptanti</a>
-            <a href="fanerofite/p-succulenti.html">P succ - Succulenti</a>
-            <a href="fanerofite/p-epifite.html">P ep - Epifite</a>
-            <a href="fanerofite/p-fruticose.html">P frut - Fruticose</a>
-        </div>
-    </details>
-
-    <details class="macro-area">
-        <summary>Camefite (Ch)</summary>
-        <div class="sub-menu">
-            <a href="camefite/ch-fruticose.html">Ch frut - Fruticose</a>
-            <a href="camefite/ch-pulvinate.html">Ch pulv - Pulvinate</a>
-            <a href="camefite/ch-reptanti.html">Ch rept - Reptanti</a>
-            <a href="camefite/ch-succulenti.html">Ch succ - Succulenti</a>
-            <a href="camefite/ch-suffruticose.html">Ch suffr - Suffruticose</a>
-            <a href="camefite/ch-sarmentose.html">Ch sarment - Sarmentose</a>
-        </div>
-    </details>
-</div>
-.action-text {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-    color: #d35400;
