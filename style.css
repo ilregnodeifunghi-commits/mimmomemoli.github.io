@@ -49,6 +49,35 @@ body {
     font-size: 0.9em;
 }
 
+<div class="container">
+    <h1>Flora della Campania</h1>
+
+    <details class="macro-area">
+        <summary>Fanerofite (P)</summary>
+        <div class="sub-menu">
+            <a href="fanerofite/p-nanofanerofite.html">NP - Nanofanerofite</a>
+            <a href="fanerofite/p-scapose.html">P scap - Scapose</a>
+            <a href="fanerofite/p-cespitose.html">P caesp - Cespitose</a>
+            <a href="fanerofite/p-lianose.html">P lian - Lianose</a>
+            <a href="fanerofite/p-reptanti.html">P rept - Reptanti</a>
+            <a href="fanerofite/p-succulenti.html">P succ - Succulenti</a>
+            <a href="fanerofite/p-epifite.html">P ep - Epifite</a>
+            <a href="fanerofite/p-fruticose.html">P frut - Fruticose</a>
+        </div>
+    </details>
+
+    <details class="macro-area">
+        <summary>Camefite (Ch)</summary>
+        <div class="sub-menu">
+            <a href="camefite/ch-fruticose.html">Ch frut - Fruticose</a>
+            <a href="camefite/ch-pulvinate.html">Ch pulv - Pulvinate</a>
+            <a href="camefite/ch-reptanti.html">Ch rept - Reptanti</a>
+            <a href="camefite/ch-succulenti.html">Ch succ - Succulenti</a>
+            <a href="camefite/ch-suffruticose.html">Ch suffr - Suffruticose</a>
+            <a href="camefite/ch-sarmentose.html">Ch sarment - Sarmentose</a>
+        </div>
+    </details>
+</div>
 .action-text {
     display: block;
     margin-top: 10px;
